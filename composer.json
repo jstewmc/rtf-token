@@ -1,0 +1,21 @@
+{
+	"name": "jstewmc/rtf-token",
+	"description": "Rich Text Format (RTF) tokens",
+	"license": "MIT",
+	"keywords": ["PHP", "rich", "text", "format", "rtf", "token"],
+	"authors": [
+		{
+			"name": "Jack Clayton",
+			"email": "clayjs0@gmail.com"	
+		}
+	],
+	"require": {},
+	"require-dev": {
+		"jstewmc/test-case": "^1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Jstewmc\\RtfToken\\": "src/"
+		}
+	}
+}
