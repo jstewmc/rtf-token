@@ -23,12 +23,12 @@ The example above would output the following:
 
 This library includes tokens for the Rich Text Format (RTF) language including:
 
-* Open-group (i.e., `{`)
-* Close-group (i.e., `}`)
-* Control word (e.g., `\b`)
-* Control symbol (e.g., `\*`)
-* Text (e.g., `foo`)
-* Other (e.g., `\0`)
+* open-group (i.e., `{`),
+* close-group (i.e., `}`),
+* control word (e.g., `\b`),
+* control symbol (e.g., `\*`),
+* text (e.g., `foo`), and
+* other (e.g., `\0`).
 
 The properties of each token differ, but all tokens implement the `_toString()` magic method.
 
@@ -45,9 +45,9 @@ namespace Jstewmc\RtfToken\Group;
 
 ### Controls
 
-This library supports _word_ and _symbol_ control tokens. 
+This library supports _control word_ and _control symbol_ tokens. 
 
-By default, both tokens are space-delimited. However, this can be turned off using the `setIsSpaceDelimited()` method.
+By default, control tokens are space-delimited. However, this can be turned off using the `setIsSpaceDelimited()` method.
 
 #### Control words
 
@@ -61,11 +61,11 @@ $word = new Word('b', 0);
 $word->getWord();       // returns "b"
 $word->getParameter();  // returns 0
 
-(string) $word;  // returns "\b "
+(string) $word;  // returns "\b0 "
 
 $word->setIsSpaceDelimited(false);
 
-(string) $word;  // returns "\b" (note, no space)
+(string) $word;  // returns "\b0" (note, no space)
 ```
 
 #### Control symbol
@@ -75,16 +75,16 @@ The control symbol token has a _symbol_ and mixed _parameter_ property:
 ```php
 namespace Jstewmc\RtfToken\Control;
 
-$symbol = new Symbol('*', 1);
+$symbol = new Symbol('\'', 99);
 
-$symbol->getSymbol();     // returns "*"
-$symbol->getParameter();  // returns 1
+$symbol->getSymbol();     // returns "'"
+$symbol->getParameter();  // returns 99
 
-(string) $symbol;  // returns "\*1 "
+(string) $symbol;  // returns "\'99 "
 
 $symbol->setIsSpaceDelimited(false);
 
-(string) $symbol;  // returns "\*1"
+(string) $symbol;  // returns "\'99" (note, no space)
 ```
 
 ### Text
@@ -103,7 +103,7 @@ $text->getText();  // returns "foo"
 
 ### Other
 
-The "other" token exists any character that isn't an _open-group_, _close-group_, _control word_, _control symbol_, or _text_. Usually, this includes special characters like line-feeds ("\n"), carriage-returns ("\r"), etc.
+The "other" token exists for any character that isn't an _open-group_, _close-group_, _control word_, _control symbol_, or _text_ token. Usually, this includes special characters like line-feeds ("\n"), carriage-returns ("\r"), etc.
 
 The "other" token has a single property, _character_:
 
